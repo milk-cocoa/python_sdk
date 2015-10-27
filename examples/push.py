@@ -13,7 +13,7 @@ except ImportError:
         sys.path.insert(0, cmd_subfolder)
 	import milkcocoa.milkcocoa as milkcocoa
 
-milkcocoaClient = milkcocoa.Milkcocoa.connectWithApiKey("vuei9dh5mu3", "57P5lBcZny6AlQEn", "DM66u0smok1BUjHAZlU9T57kBcQUv5OKIFMkvTQ1")
+milkcocoaClient = milkcocoa.Milkcocoa.connectWithApiKey("vuei9dh5mu3", "57P5lBcZny6AlQEn", "DM66u0smok1BUjHAZlU9T57kBcQUv5OKIFMkvTQ1", useSSL=False)
 #milkcocoaClient = milkcocoa.Milkcocoa.connect("vuei9dh5mu3.mlkcca.com");
 
 datastore = milkcocoaClient.datastore("python")
