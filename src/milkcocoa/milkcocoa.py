@@ -4,7 +4,7 @@ import json
 import paho.mqtt.client as mqtt
 
 class Milkcocoa:
-	def __init__(self, app_id, username, useSSL=True):
+	def __init__(self, app_id, username, useSSL=True, blocking=False):
 		self.host = app_id + ".mlkcca.com"
 		self.app_id = app_id;
 		self.username = username;
@@ -19,7 +19,11 @@ class Milkcocoa:
 			ca_cert = os.path.realpath(os.path.abspath(os.path.join(os.path.split(inspect.getfile( inspect.currentframe() ))[0],"../../ca.cert")))
 			self.client.tls_set(ca_cert)
 		self.client.connect(self.host, port, 36)
-		self.client.loop_start()
+		if (blocking == False):
+			self.client.loop_start()
+
+	def loop_forever(self):
+		self.client.loop_forever()
 
 	def on_connect(self, mqttc, client, userdata, rc):
 		print("Connected with result code "+str(rc))
@@ -35,12 +39,12 @@ class Milkcocoa:
 		return self.datastores[path]
 
 	@staticmethod
-	def connect(app_id, useSSL=True):
-		return Milkcocoa(app_id, "sdammy", useSSL=useSSL)
+	def connect(app_id, useSSL=True, blocking=False):
+		return Milkcocoa(app_id, "sdammy", useSSL=useSSL, blocking=blocking)
 
 	@staticmethod
-	def connectWithApiKey(app_id, key, secret, useSSL=True):
-		return Milkcocoa(app_id, "k"+key+":"+secret, useSSL=useSSL)
+	def connectWithApiKey(app_id, key, secret, useSSL=True, blocking=False):
+		return Milkcocoa(app_id, "k"+key+":"+secret, useSSL=useSSL, blocking=blocking)
 
 class DataStore:
 	def __init__(self, milkcocoa, path):
