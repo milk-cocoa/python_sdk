@@ -15,7 +15,7 @@ except ImportError:
     import milkcocoa.milkcocoa as milkcocoa
 
 #milkcocoaClient = milkcocoa.Milkcocoa.connectWithApiKey("vuei9dh5mu3", "57P5lBcZny6AlQEn", "DM66u0smok1BUjHAZlU9T57kBcQUv5OKIFMkvTQ1", useSSL=False)
-milkcocoaClient = milkcocoa.Milkcocoa.connect("vuei9dh5mu3", useSSL=True, blocking=False);
+milkcocoaClient = milkcocoa.Milkcocoa.connect("vuei9dh5mu3", useSSL=False, blocking=False);
 
 datastore = milkcocoaClient.datastore("python")
 
