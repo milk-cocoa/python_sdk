@@ -10,9 +10,12 @@ class Milkcocoa:
 		self.username = username;
 		self.datastores = {}
 		self.client = mqtt.Client()
+		self.client._strict_protocol = False
 		self.client.username_pw_set(self.username, self.app_id)
 		self.client.on_connect = self.on_connect
 		self.client.on_message = self.on_message
+		#self.client.on_subscribe = self.on_subscribe
+		#self.client.on_log = self.on_log
 		port = 1883
 		if (useSSL):
 			port = 8883
@@ -33,7 +36,13 @@ class Milkcocoa:
 		topic_arr.pop(0)
 		event = topic_arr.pop()
 		self.datastores["/".join(topic_arr)].fire(event, str(msg.payload))
-	
+
+	def on_subscribe(self, client, userdata, mid, granted_qos):
+		print granted_qos
+
+	def on_log(self, client, userdata, level, buf):
+		print buf
+
 	def datastore(self, path):
 		self.datastores[path] = DataStore(self, path)
 		return self.datastores[path]

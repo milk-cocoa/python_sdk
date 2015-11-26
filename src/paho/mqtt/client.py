@@ -1268,7 +1268,6 @@ class Client(object):
                         and self._current_out_packet is None
                         and len(self._out_packet) == 0
                         and len(self._out_messages) == 0):
-
                     rc = 1
                     run = False
 
@@ -1979,10 +1978,10 @@ class Client(object):
             if self._in_packet['remaining_length'] != 2:
                 return MQTT_ERR_PROTOCOL
 
-        if len(self._in_packet['packet']) != 2:
-            return MQTT_ERR_PROTOCOL
+        #if len(self._in_packet['packet']) != 2:
+        #    return MQTT_ERR_PROTOCOL
 
-        (flags, result) = struct.unpack("!BB", self._in_packet['packet'])
+        (flags, result, ts) = struct.unpack("!BBq", self._in_packet['packet'])
         if result == CONNACK_REFUSED_PROTOCOL_VERSION and self._protocol == MQTTv311:
             self._easy_log(MQTT_LOG_DEBUG, "Received CONNACK ("+str(flags)+", "+str(result)+"), attempting downgrade to MQTT v3.1.")
             # Downgrade to MQTT v3.1
