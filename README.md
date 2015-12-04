@@ -29,3 +29,10 @@ datastore.push({"content":"Hello"})
 while(True):
 	time.sleep(1)
 ```
+
+### コントリビューター募集中
+
+Milkcocoa Python SDKのコントリビューターになって頂ける方を募集しています。
+興味がある方は、以下のメールアドレスにお気軽に連絡下さい。
+
+contact@mlkcca.com
