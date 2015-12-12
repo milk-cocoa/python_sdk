@@ -8,7 +8,7 @@ except ImportError:
     print('Install pip in your computer')
     exit(1)
 
-from src.milkcocoa import __version__ as version
+from milkcocoa import __version__ as version
 
 
 def get_packages():
