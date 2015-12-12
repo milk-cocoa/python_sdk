@@ -294,3 +294,4 @@ target/
 
 # Misc
 local
+.credentials
