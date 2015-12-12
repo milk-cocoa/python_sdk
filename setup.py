@@ -18,7 +18,7 @@ def get_packages():
     if not os.path.isfile(req_path):
         raise OSError('requirements.txt file not found in project directory')
 
-    requirements = parse_requirements(req_path)
+    requirements = parse_requirements(filename=req_path, session=False)
     requirements = [str(requirement.req) for requirement in requirements]
 
     return requirements
