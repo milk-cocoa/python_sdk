@@ -19,13 +19,12 @@ def get_packages():
         raise OSError('requirements.txt file not found in project directory')
 
     requirements = parse_requirements(filename=req_path, session=False)
-    requirements = [str(requirement.req) for requirement in requirements]
+    requirements = [requirement.req.project_name for requirement in requirements]
 
     return requirements
 
-
 setup(
-    name='Milkcocoa-python-sdk',
+    name='milkcocoa-python-sdk',
     version=version,
-    packages=get_packages()
+    install_requires=get_packages()
 )
