@@ -2,14 +2,20 @@
 
 import unittest
 
+from milkcocoa.keys_file_api import MilkCocoaKeys
+
 
 class ApiKeys(unittest.TestCase):
 
     def setUp(self):
-        pass
+        self.mkca_key = MilkCocoaKeys()
 
     def tearDown(self):
         pass
+
+    def test_instance(self):
+        self.assertIsNotNone(self.mkca_key)
+        self.assertIsInstance(self.mkca_key, MilkCocoaKeys)
 
     def test_file_exists(self):
         pass
