@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from __future__ import print_function
-from distutils.core import setup
+from setuptools import setup
 try:
     from pip.req import parse_requirements
 except ImportError:
