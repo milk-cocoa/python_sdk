@@ -30,6 +30,10 @@ def create_dumb_file():
     for option, dumb_value in zip(OPTIONS, DUMB_OPTIONS_VALUES):
         config_parser.set(SECTION_NAME, option, dumb_value)
 
+    directory_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '../' + CREDENTIALS_FOLDER_NAME)
+    if not os.path.exists(directory_path):
+        os.makedirs(directory_path)
+
     with open(get_dumb_path(), 'w') as dumb_file:
         config_parser.write(dumb_file)
 
