@@ -38,6 +38,13 @@ def get_version():
     return version
 
 
+def commit_update_master(tag_version):
+    commit_message = 'feat version ' + tag_version
+    git('add', '-u')
+    git('commit', '-m', commit_message)
+    git('push', 'origin', 'master')
+
+
 def save_build_version(old_build_version, build_version):
     old_build_version = '__build_version__ = "' + str(old_build_version) + '"'
     build_version = '__build_version__ = "' + str(build_version) + '"'
@@ -57,4 +64,5 @@ if __name__ == '__main__':
     v = get_version()
 
     tag_version = create_tag(v, bv)
+    commit_update_master(tag_version)
     upload_tag(tag_version)
