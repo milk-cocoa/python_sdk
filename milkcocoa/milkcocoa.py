@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os
 import inspect
 import json
@@ -7,8 +8,8 @@ import paho.mqtt.client as mqtt
 class Milkcocoa:
     def __init__(self, app_id, username, useSSL=True, blocking=False):
         self.host = app_id + ".mlkcca.com"
-        self.app_id = app_id;
-        self.username = username;
+        self.app_id = app_id
+        self.username = username
         self.datastores = {}
         self.client = mqtt.Client()
         self.client._strict_protocol = False
@@ -40,10 +41,10 @@ class Milkcocoa:
         self.datastores["/".join(topic_arr)].fire(event, str(msg.payload))
 
     def on_subscribe(self, client, userdata, mid, granted_qos):
-        print granted_qos
+        print(granted_qos)
 
     def on_log(self, client, userdata, level, buf):
-        print buf
+        print(buf)
 
     def datastore(self, path):
         self.datastores[path] = DataStore(self, path)
@@ -65,10 +66,10 @@ class DataStore:
         self.path = path
 
     def push(self, data_element):
-        self.client.publish(self.milkcocoa.app_id + "/" + self.path + "/push", json.dumps({'params': data_element}));
+        self.client.publish(self.milkcocoa.app_id + "/" + self.path + "/push", json.dumps({'params': data_element}))
 
     def send(self, data_element):
-        self.client.publish(self.milkcocoa.app_id + "/" + self.path + "/send", json.dumps({'params': data_element}));
+        self.client.publish(self.milkcocoa.app_id + "/" + self.path + "/send", json.dumps({'params': data_element}))
 
     def on(self, event, cb):
         self.client.subscribe(self.milkcocoa.app_id + "/" + self.path + "/" + event, 0)
