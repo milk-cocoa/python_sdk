@@ -3,6 +3,12 @@ test:
     - ./execute_tests.sh
     - ./test/test.sh
 
+  post:
+    - git config user.name "circleci"
+    - git config user.email "vitomarti@gmail.com"
+    - python version_update.py
+
 dependencies:
   pre:
     - pip install -r requirements_tests.txt
+    - pip install sh
