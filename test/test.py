@@ -3,7 +3,7 @@ import sys, os
 import time
 
 try:
-    import milkcocoa.milkcocoa as milkcocoa
+    from milkcocoa import milkcocoa
 except ImportError:
     # This part is only required to run the example from within the examples
     # directory when the module itself is not installed.
