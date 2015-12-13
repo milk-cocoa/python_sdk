@@ -46,8 +46,8 @@ def delete_dumb_file():
 class ApiKeys(unittest.TestCase):
 
     def setUp(self):
-        self.mkca_key = MilkCocoaKeys()
         create_dumb_file()
+        self.mkca_key = MilkCocoaKeys(key_file_name='keys_dumb.ini')
 
     def tearDown(self):
         delete_dumb_file()
@@ -56,20 +56,17 @@ class ApiKeys(unittest.TestCase):
         self.assertIsNotNone(self.mkca_key)
         self.assertIsInstance(self.mkca_key, MilkCocoaKeys)
 
-    def test_has_good_header(self):
-        pass
-
-    def test_has_bad_header(self):
-        pass
-
     def test_has_app_id(self):
-        pass
+        credentials = self.mkca_key.get_credentials()
+        self.assertIn('app_id', credentials)
 
     def test_has_access_key(self):
-        pass
+        credentials = self.mkca_key.get_credentials()
+        self.assertIn('key', credentials)
 
     def test_has_secret_key(self):
-        pass
+        credentials = self.mkca_key.get_credentials()
+        self.assertIn('secret', credentials)
 
 
 if __name__ == '__main__':

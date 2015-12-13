@@ -17,10 +17,11 @@ OPTIONS = ['app_id', 'key', 'secret']
 
 class MilkCocoaKeys(object):
 
-    def __init__(self):
+    def __init__(self, key_file_name=None):
+        self.__file_name = CREDENTIALS_FILE_NAME if not key_file_name else key_file_name
         self._path_api_key = os.path.join(
             os.path.abspath(os.path.dirname(__file__)),
-            '../' + os.path.join(CREDENTIALS_FOLDER_NAME, CREDENTIALS_FILE_NAME)
+            '../' + os.path.join(CREDENTIALS_FOLDER_NAME, self.__file_name)
         )
         self._config_parser = configparser()
 
@@ -31,7 +32,13 @@ class MilkCocoaKeys(object):
             raise IOError
 
     def _read_key_file(self):
-        return self._config_parser.read(self._path_api_key)
+        self._config_parser.read(self._path_api_key)
+        options = self._config_parser.options(SECTION_NAME)
+        content = {}
+
+        for option in options:
+            content[option] = self._config_parser.get(SECTION_NAME, option)
+        return content
 
     def get_credentials(self):
         self._key_file_exists()
