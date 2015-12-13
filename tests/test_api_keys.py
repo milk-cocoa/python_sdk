@@ -8,7 +8,7 @@ except ImportError:
     from configparser import configparser
 
 from milkcocoa.keys_file_api import MilkCocoaKeys
-from milkcocoa.keys_file_api import CREDENTIALS_FILE_NAME, CREDENTIALS_FOLDER_NAME, SECTION_NAME, OPTIONS
+from milkcocoa.keys_file_api import CREDENTIALS_FOLDER_NAME, SECTION_NAME, OPTIONS
 
 
 DUMB_OPTIONS_VALUES = ['vuei9dh5mu3', '57P5lBcZny6AlQEn', 'DM66u0smok1BUjHAZlU9T57kBcQUv5OKIFMkvTQ1']
@@ -17,7 +17,7 @@ DUMB_OPTIONS_VALUES = ['vuei9dh5mu3', '57P5lBcZny6AlQEn', 'DM66u0smok1BUjHAZlU9T
 def get_dumb_path():
     path = os.path.join(
         os.path.abspath(os.path.dirname(__file__)),
-        '../' + os.path.join(CREDENTIALS_FOLDER_NAME, CREDENTIALS_FILE_NAME)
+        '../' + os.path.join(CREDENTIALS_FOLDER_NAME, 'keys_dumb.ini')
     )
 
     return path
