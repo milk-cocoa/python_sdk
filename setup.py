@@ -26,5 +26,6 @@ def get_packages():
 setup(
     name='milkcocoa-python-sdk',
     version=version,
-    install_requires=get_packages()
+    install_requires=get_packages(),
+    packages=['milkcocoa']
 )
