@@ -5,7 +5,7 @@ import os
 try:
     from ConfigParser import ConfigParser as configparser
 except ImportError:
-    from configparser import configparser
+    from configparser import ConfigParser as configparser
 
 
 CREDENTIALS_FOLDER_NAME = '.credentials'

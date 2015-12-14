@@ -5,7 +5,7 @@ import os
 try:
     from ConfigParser import ConfigParser as configparser
 except ImportError:
-    from configparser import configparser
+    from configparser import ConfigParser as configparser
 
 from milkcocoa.keys_file_api import MilkCocoaKeys
 from milkcocoa.keys_file_api import CREDENTIALS_FOLDER_NAME, SECTION_NAME, OPTIONS
