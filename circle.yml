@@ -1,7 +1,7 @@
 test:
   override:
     - ./execute_tests.sh
-    - ./test/test.sh
+    # - ./test/test.sh
 
 dependencies:
   pre:
