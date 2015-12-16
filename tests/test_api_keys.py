@@ -68,6 +68,19 @@ class ApiKeys(unittest.TestCase):
         credentials = self.mkca_key.get_credentials()
         self.assertIn('secret', credentials)
 
+    def test_read_key_file(self):
+        content = self.mkca_key._read_key_file()
+        self.assertIsNotNone(content)
+
+        for option in OPTIONS:
+            self.assertIn(option, content)
+
+    def test_file_not_exists(self):
+        self.mkca_key._path_api_key = 'dumb'
+
+        with self.assertRaises(IOError):
+            self.mkca_key._key_file_exists()
+
 
 if __name__ == '__main__':
     unittest.main()
