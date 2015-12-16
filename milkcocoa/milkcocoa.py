@@ -22,7 +22,7 @@ class Milkcocoa:
         if useSSL:
             port = 8883
             ca_cert = os.path.realpath(os.path.abspath(
-                os.path.join(os.path.split(inspect.getfile(inspect.currentframe()))[0], "../../ca.cert")))
+                os.path.join(os.path.split(inspect.getfile(inspect.currentframe()))[0], "../ca.cert")))
             self.client.tls_set(ca_cert)
         self.client.connect(self.host, port, 36)
         if not blocking:
