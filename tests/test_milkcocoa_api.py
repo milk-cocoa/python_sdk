@@ -13,7 +13,7 @@ class TestMilkcocoaApi(unittest.TestCase):
 
     def setUp(self):
         create_dumb_file()
-        self.keys = MilkCocoaKeys()
+        self.keys = MilkCocoaKeys(key_file_name='keys_dumb.ini')
 
     def tearDown(self):
         delete_dumb_file()
