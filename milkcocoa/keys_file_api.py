@@ -33,7 +33,7 @@ class MilkCocoaKeys(object):
         import os
 
         if not os.path.isfile(self._path_api_key):
-            raise IOError
+            raise IOError('File %s not found' % self._path_api_key)
 
     def _read_key_file(self):
         self._config_parser.read(self._path_api_key)
