@@ -14,6 +14,10 @@ CREDENTIALS_FILE_NAME = 'keys.ini'
 SECTION_NAME = 'credentials'
 OPTIONS = ['app_id', 'key', 'secret']
 
+__all__ = [
+    'MilkCocoaKeys'
+]
+
 
 class MilkCocoaKeys(object):
 
