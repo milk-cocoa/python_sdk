@@ -15,7 +15,7 @@ SECTION_NAME = 'credentials'
 OPTIONS = ['app_id', 'key', 'secret']
 
 __all__ = [
-    'MilkCocoaKeys'
+    'MilkCocoaKeys', 'CREDENTIALS_FILE_NAME', 'CREDENTIALS_FOLDER_NAME', 'OPTIONS', 'SECTION_NAME'
 ]
 
 
