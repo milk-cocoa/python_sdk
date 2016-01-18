@@ -1,3 +1,9 @@
 test:
   override:
-    - ./test/test.sh
+    - ./execute_tests.sh
+    # - ./test/test.sh
+
+dependencies:
+  pre:
+    - pip install -r requirements_tests.txt
+    - pip install sh
