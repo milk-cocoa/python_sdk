@@ -4,8 +4,7 @@ import time
 
 from milkcocoa import milkcocoa
 
-#milkcocoaClient = milkcocoa.Milkcocoa.connectWithApiKey("vuei9dh5mu3", "57P5lBcZny6AlQEn", "DM66u0smok1BUjHAZlU9T57kBcQUv5OKIFMkvTQ1", useSSL=False)
-milkcocoaClient = milkcocoa.Milkcocoa.connect("vuei9dh5mu3", useSSL=False, blocking=False);
+milkcocoaClient = milkcocoa.Milkcocoa.connect('BJBop-Szz','QvXkGBVhDx8Mzj7G-BTH5Sv9Lo0iPv6ED1zYzKHU')
 
 datastore = milkcocoaClient.datastore("python")
 
