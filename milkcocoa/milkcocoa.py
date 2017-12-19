@@ -3,6 +3,7 @@ import os
 import inspect
 import json
 import paho.mqtt.client as mqtt
+import thread
 
 __all__ = [
     'Milkcocoa', 'DataStore'
@@ -11,7 +12,7 @@ __all__ = [
 
 class Milkcocoa:
     def __init__(self, app_id, username, useSSL=True, blocking=False):
-        self.host = app_id + ".mlkcca.com"
+        self.host = "pubsub1.mlkcca.com"
         self.app_id = app_id
         self.username = username
         self.datastores = {}
@@ -19,7 +20,7 @@ class Milkcocoa:
         self.client._strict_protocol = False
         self.client.username_pw_set(self.username, self.app_id)
         self.client.on_connect = self.on_connect
-        self.client.on_message = self.on_message
+        self.client.on_message = self.create_thread_for_message
         # self.client.on_subscribe = self.on_subscribe
         # self.client.on_log = self.on_log
         port = 1883
@@ -38,12 +39,15 @@ class Milkcocoa:
     def on_connect(self, mqttc, client, userdata, rc):
         print("Connected with result code " + str(rc))
 
+    def create_thread_for_message(self,mqttc,obj, msg):
+        thread.start_new_thread(self.on_message,(mqttc,obj,msg))
+
     def on_message(self, mqttc, obj, msg):
         topic_arr = msg.topic.split("/")
         topic_arr.pop(0)
         event = topic_arr.pop()
         self.datastores["/".join(topic_arr)].fire(event, str(msg.payload))
-
+        
     def on_subscribe(self, client, userdata, mid, granted_qos):
         print(granted_qos)
 
@@ -55,12 +59,8 @@ class Milkcocoa:
         return self.datastores[path]
 
     @staticmethod
-    def connect(app_id, useSSL=True, blocking=False):
-        return Milkcocoa(app_id, "sdammy", useSSL=useSSL, blocking=blocking)
-
-    @staticmethod
-    def connectWithApiKey(app_id, key, secret, useSSL=True, blocking=False):
-        return Milkcocoa(app_id, "k" + key + ":" + secret, useSSL=useSSL, blocking=blocking)
+    def connect(app_id, key, useSSL=True, blocking=False):
+        return Milkcocoa(app_id, "k" + key, useSSL=useSSL, blocking=blocking)
 
 
 class DataStore:
@@ -76,7 +76,8 @@ class DataStore:
         self.client.publish(self.milkcocoa.app_id + "/" + self.path + "/send", json.dumps({'params': data_element}))
 
     def on(self, event, cb):
-        self.client.subscribe(self.milkcocoa.app_id + "/" + self.path + "/" + event, 0)
+
+        self.client.subscribe(self.milkcocoa.app_id + "/" + self.path + "/_" + event[0], 0)
         if event == "push":
             self.on_push = cb
         elif event == "send":
@@ -84,7 +85,7 @@ class DataStore:
 
     def fire(self, event, payload):
         value = json.loads(payload)["params"]
-        if event == "push":
+        if event == "_p":
             self.on_push({"value": value})
-        elif event == "send":
+        elif event == "_s":
             self.on_send({"value": value})
